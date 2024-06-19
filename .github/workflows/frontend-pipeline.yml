@@ -1,0 +1,78 @@
+name: frontend-pipeline
+
+on:
+  push:
+    branches:
+      - main
+      - feature/*
+  pull_request:
+    branches:
+      - main
+      - feature/*
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '14'
+               
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build App
+        run: npm run build
+
+      
+
+  #sonarqube-scan:
+  #  needs: build-and-test
+  #  runs-on: ubuntu-latest
+  #  steps:
+  #    - name: SonarQube Scan
+  #      uses: SonarSource/sonarqube-scan-action@master
+  #      env:
+  #        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+  #        SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+  #      with:
+  #        args: >
+  #          -Dsonar.projectKey=zionweb_orders-service-example
+  #          -Dsonar.organization=zionwebsonar
+  #          -Dsonar.host.url=https://sonarcloud.io
+  #          -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+  #          -Dsonar.java.binaries=target/classes
+
+
+  deploy-dev:
+    needs: build-and-test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy
+        run: echo "Deploying to ECS dev..."
+
+  deploy-staging:
+    needs: deploy-dev
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy
+        run: echo "Deploying to ECS staging..."
+
+  manual-aprove:
+    needs: deploy-staging
+    runs-on: ubuntu-latest
+    steps:
+      - name: Approve
+        run: echo "Approving..."
+
+  deploy-prod:
+    needs: manual-aprove
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy
+        run: echo "Deploying to ECS prod..."
+

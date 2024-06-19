@@ -19,6 +19,7 @@ RUN npm run build
 # Utiliza una imagen de Nginx para servir los archivos estáticos
 FROM nginx:alpine
 
+RUN ls -la
 # Copia los archivos de build generados al directorio de Nginx
 COPY --from=build /app/catalog/src /usr/share/nginx/html
 

@@ -36,6 +36,8 @@ jobs:
           ls -la
           cd catalog/
           ls -la
+          cd src/
+          ls -la
       - name: Build Docker image
         run: docker build -t frontend-app .
 

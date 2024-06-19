@@ -28,18 +28,7 @@ jobs:
       - name: Build App
         run: npm run build
 
-      - name: Encontrando empaquetado
-        run: |
-          pwd
-          ls -la  
-          cd apps/
-          ls -la
-          cd catalog/
-          ls -la
-          cd src/
-          ls -la
-      - name: Build Docker image
-        run: docker build -t frontend-app .
+      
 
   #sonarqube-scan:
   #  needs: build-and-test

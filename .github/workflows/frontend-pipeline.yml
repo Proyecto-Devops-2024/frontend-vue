@@ -32,6 +32,9 @@ jobs:
         run: |
           pwd
           ls -la  
+          cd apps/
+          ls -la
+          
       - name: Build Docker image
         run: docker build -t frontend-app .
 

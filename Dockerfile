@@ -20,7 +20,7 @@ RUN npm run build
 FROM nginx:alpine
 
 # Copia los archivos de build generados al directorio de Nginx
-COPY --from=build app/catalog/src /usr/share/nginx/html
+COPY --from=build /home/runner/work/frontend-react/frontend-react/app/catalog/src/ /usr/share/nginx/html
 
 # Expone el puerto 80 para acceder a la aplicación
 EXPOSE 80

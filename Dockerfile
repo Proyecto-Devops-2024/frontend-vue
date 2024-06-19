@@ -14,13 +14,13 @@ RUN npm install
 COPY . .
 
 # Construye la aplicación para producción
-RUN npm run build frontend
+RUN npm run build
 
 # Utiliza una imagen de Nginx para servir los archivos estáticos
 FROM nginx:alpine
 
 # Copia los archivos de build generados al directorio de Nginx
-COPY --from=build /app/catalog/src/ /usr/share/nginx/html
+COPY --from=build /src/ /usr/share/nginx/html
 
 # Expone el puerto 80 para acceder a la aplicación
 EXPOSE 80

@@ -28,6 +28,15 @@ jobs:
       - name: Build App
         run: npm run build
 
+      - name: Find build artifact
+        run: |
+          pwd
+          ls -la
+          ls -la ./dist
+          ls -la ./dist/apps
+          ls -la ./dist/apps/catalog
+          
+
       
 
   #sonarqube-scan:

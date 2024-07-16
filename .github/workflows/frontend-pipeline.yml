@@ -14,7 +14,6 @@ on:
 permissions: write-all
 
 jobs:
-  
   main-workflow:
     uses: Proyecto-Devops-2024/devops-repo/.github/workflows/main-frontend.yml@main
     with:
